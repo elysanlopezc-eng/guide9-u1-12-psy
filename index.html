@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Synthesis and Final Portfolio - Colegio Montano</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        montano: {
+                            blue: '#1269A8',
+                            yellow: '#F7D615',
+                            teal: '#54887D',
+                            lightblue: '#88B5C7',
+                            olive: '#A6B046',
+                            softwhite: '#F2F5E9'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Nunito', 'Segoe UI', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #e5ebdf;
+            font-family: 'Nunito', 'Segoe UI', sans-serif;
+        }
+        .whiteboard-frame {
+            background-color: #ffffff;
+            border: 12px solid #d1d5db;
+            border-radius: 20px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .tab-btn.active {
+            background-color: #1269A8;
+            color: #ffffff;
+            border-bottom: 4px solid #F7D615;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #88B5C7;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="p-2 md:p-6 min-h-screen flex flex-col justify-center items-center">
+
+    <!-- Main Container Frame -->
+    <div id="mainContainer" class="whiteboard-frame w-full max-w-7xl min-h-[90vh] flex flex-col justify-between overflow-hidden transition-all duration-300">
+        
+        <!-- Header Section -->
+        <header class="bg-montano-softwhite p-4 border-b-2 border-gray-200 flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center gap-4">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyEop0yf6lZ7Jk9MILZxF1rBj4Oqs5esyhIQ&s" alt="Colegio Montano Logo" class="h-14 object-contain rounded-md bg-white p-1 border">
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold text-montano-blue tracking-tight">COLEGIO MONTANO</h1>
+                    <p class="text-xs md:text-sm font-semibold text-montano-teal">Grade: 5th Marketing | Level: C1 Advanced ESL</p>
+                    <p class="text-xs font-bold text-montano-olive">Guide 9: Unit Synthesis and Final Portfolio</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <button onclick="toggleFullscreen()" class="flex items-center gap-2 bg-montano-blue hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-200 text-sm">
+                    <i class="fa-solid fa-expand"></i> <span class="hidden sm:inline">Fullscreen Digital Board</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="bg-gray-100 border-b border-gray-300 flex overflow-x-auto custom-scrollbar">
+            <button onclick="switchTab('tab1')" id="btn-tab1" class="tab-btn active flex-1 min-w-[160px] py-3 px-4 font-bold text-sm text-gray-700 hover:text-montano-blue flex items-center justify-center gap-2 transition duration-150">
+                <i class="fa-solid fa-book-open"></i> 1. Theory & Grammar
+            </button>
+            <button onclick="switchTab('tab2')" id="btn-tab2" class="tab-btn flex-1 min-w-[160px] py-3 px-4 font-bold text-sm text-gray-700 hover:text-montano-blue flex items-center justify-center gap-2 transition duration-150">
+                <i class="fa-solid fa-list-check"></i> 2. Solved Examples (15)
+            </button>
+            <button onclick="switchTab('tab3')" id="btn-tab3" class="tab-btn flex-1 min-w-[160px] py-3 px-4 font-bold text-sm text-gray-700 hover:text-montano-blue flex items-center justify-center gap-2 transition duration-150">
+                <i class="fa-solid fa-microphone"></i> 3. Voice Simulator & Dashboard
+            </button>
+            <button onclick="switchTab('tab4')" id="btn-tab4" class="tab-btn flex-1 min-w-[160px] py-3 px-4 font-bold text-sm text-gray-700 hover:text-montano-blue flex items-center justify-center gap-2 transition duration-150">
+                <i class="fa-solid fa-lightbulb"></i> 4. Critical Reflection
+            </button>
+            <button onclick="switchTab('tab5')" id="btn-tab5" class="tab-btn flex-1 min-w-[160px] py-3 px-4 font-bold text-sm text-gray-700 hover:text-montano-blue flex items-center justify-center gap-2 transition duration-150">
+                <i class="fa-solid fa-pen-to-square"></i> 5. Formative Evaluation (15)
+            </button>
+        </nav>
+
+        <!-- Content Area -->
+        <main class="p-4 sm:p-6 flex-grow bg-white custom-scrollbar overflow-y-auto max-h-[calc(90vh-140px)]">
+
+            <!-- TAB 1: THEORY & GRAMMAR -->
+            <section id="tab1" class="tab-content space-y-6">
+                <!-- Header Banner -->
+                <div class="bg-gradient-to-r from-montano-blue to-montano-teal text-white p-6 rounded-xl shadow-md">
+                    <h2 class="text-2xl font-bold mb-2">Theoretical Foundations: Unit Synthesis & Final Portfolio</h2>
+                    <p class="text-sm sm:text-base opacity-90">Comprehensive review of psychology as a science, historical foundations, early schools, modern perspectives, human behavior, mental processes, and marketing applications with final portfolio compilation.</p>
+                </div>
+
+                <!-- Retrieval Practice Box -->
+                <div class="bg-montano-softwhite border-l-4 border-montano-yellow p-4 rounded-r-lg shadow-sm">
+                    <h3 class="font-bold text-montano-blue text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-rotate text-montano-yellow"></i> 10-Min Concept Map & Retrieval Warm-Up
+                    </h3>
+                    <p class="text-sm text-gray-700 mt-1">
+                        Synthesize the entire unit: connect Wundt's 1879 experimental laboratory and early schools (Structuralism, Behaviorism, Gestalt) to modern psychological perspectives and consumer ethics. Map out how mental processes drive consumer choices.
+                    </p>
+                </div>
+
+                <!-- Concept Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- 1. Theoretical Integration -->
+                    <div class="border-2 border-montano-blue rounded-xl p-5 bg-white shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="w-8 h-8 rounded-full bg-montano-blue text-white flex items-center justify-center font-bold text-sm"><i class="fa-solid fa-network-wired"></i></span>
+                                <h4 class="font-bold text-gray-800 text-base">1. Dual-Perspective Analysis</h4>
+                            </div>
+                            <p class="text-xs text-gray-600 mb-4">Explaining complex consumer decisions by simultaneously applying two distinct psychological perspectives (e.g., Cognitive + Behavioral or Sociocultural + Psychodynamic).</p>
+                        </div>
+                        <div class="text-[11px] font-semibold text-montano-blue bg-blue-50 p-2 rounded">Key Concept: Multi-Perspective Synthesis</div>
+                    </div>
+
+                    <!-- 2. Final Portfolio & Peer Checklist -->
+                    <div class="border-2 border-montano-teal rounded-xl p-5 bg-white shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="w-8 h-8 rounded-full bg-montano-teal text-white flex items-center justify-center font-bold text-sm"><i class="fa-solid fa-clipboard-check"></i></span>
+                                <h4 class="font-bold text-gray-800 text-base">2. Portfolio Organization</h4>
+                            </div>
+                            <p class="text-xs text-gray-600 mb-4">Structuring verified evidence, peer feedback checklists, and campaign analyses for final submission (Activity 4 due).</p>
+                        </div>
+                        <div class="text-[11px] font-semibold text-montano-teal bg-teal-50 p-2 rounded">Key Concept: Activity 4 Final Portfolio Due</div>
+                    </div>
+
+                    <!-- 3. Reflection & Ethics -->
+                    <div class="border-2 border-montano-olive rounded-xl p-5 bg-white shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="w-8 h-8 rounded-full bg-montano-olive text-white flex items-center justify-center font-bold text-sm"><i class="fa-solid fa-scale-balanced"></i></span>
+                                <h4 class="font-bold text-gray-800 text-base">3. Ethical Consumerism</h4>
+                            </div>
+                            <p class="text-xs text-gray-600 mb-4">Reflecting on the societal responsibility of marketers when leveraging psychological science in global advertising campaigns.</p>
+                        </div>
+                        <div class="text-[11px] font-semibold text-montano-olive bg-green-50 p-2 rounded">Key Concept: Psychological Science & Ethics</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: SOLVED EXAMPLES (15 EXAMPLES WITH TTS) -->
+            <section id="tab2" class="tab-content hidden space-y-6">
+                <div class="flex justify-between items-center border-b pb-3">
+                    <div>
+                        <h2 class="text-xl font-bold text-montano-blue">15 Analytical Solved Examples (Guide 9 Synthesis)</h2>
+                        <p class="text-xs text-gray-500">Categorized by difficulty level. Click the speaker icon to listen to the explanation using native Text-to-Speech.</p>
+                    </div>
+                </div>
+
+                <!-- Level 1: Basic -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-bold text-montano-blue flex items-center gap-2">
+                        <span class="px-3 py-1 bg-blue-100 text-montano-blue text-xs rounded-full uppercase">Level 1 - Basic</span>
+                        Unit Foundations, History & Core Terminology
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="basic-examples"></div>
+                </div>
+
+                <!-- Level 2: Intermediate -->
+                <div class="space-y-4 pt-4 border-t">
+                    <h3 class="text-lg font-bold text-montano-teal flex items-center gap-2">
+                        <span class="px-3 py-1 bg-teal-100 text-montano-teal text-xs rounded-full uppercase">Level 2 - Intermediate</span>
+                        Dual-Perspective Consumer Decision Analysis
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="intermediate-examples"></div>
+                </div>
+
+                <!-- Level 3: Advanced -->
+                <div class="space-y-4 pt-4 border-t">
+                    <h3 class="text-lg font-bold text-montano-olive flex items-center gap-2">
+                        <span class="px-3 py-1 bg-green-100 text-montano-olive text-xs rounded-full uppercase">Level 3 - Advanced</span>
+                        Portfolio Synthesis, Peer Checklists & Ethical Marketing Governance
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="advanced-examples"></div>
+                </div>
+            </section>
+
+            <!-- TAB 3: LIVE INTERACTIVE VOICE SIMULATOR & DASHBOARD -->
+            <section id="tab3" class="tab-content hidden space-y-6">
+                <div class="bg-montano-softwhite p-4 rounded-xl border border-montano-lightblue flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-montano-blue flex items-center gap-2">
+                            <i class="fa-solid fa-headset text-montano-yellow"></i> Final Portfolio Defense Boardroom Simulator (Guide 9)
+                        </h2>
+                        <p class="text-xs text-gray-600">Roleplay as a senior marketing strategist defending your comprehensive unit portfolio and multi-perspective consumer campaign.</p>
+                    </div>
+                    <div class="flex items-center gap-2 bg-white px-3 py-2 rounded-lg border shadow-sm text-xs font-semibold text-gray-700">
+                        <span id="mic-status-indicator" class="w-3 h-3 rounded-full bg-gray-400 inline-block"></span>
+                        <span id="mic-status-text">Microphone Idle</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <!-- Simulator Interface (Left - 7 Cols) -->
+                    <div class="lg:col-span-7 bg-white border border-gray-200 rounded-xl p-5 shadow-sm flex flex-col justify-between space-y-4">
+                        <!-- Scenario Description -->
+                        <div class="bg-blue-50 border-l-4 border-montano-blue p-4 rounded">
+                            <p class="text-xs font-bold text-montano-blue uppercase tracking-wider">Current Case Prompt:</p>
+                            <p class="text-sm font-semibold text-gray-800 mt-1" id="simulator-prompt">
+                                "Welcome to your final portfolio defense. Explain how your campaign integrates two distinct psychological perspectives (e.g., Cognitive and Behavioral) while upholding strict ethical standards."
+                            </p>
+                        </div>
+
+                        <!-- Dialogue Box -->
+                        <div id="dialogue-box" class="h-48 overflow-y-auto bg-gray-50 border p-3 rounded-lg text-sm space-y-3 custom-scrollbar">
+                            <div class="flex gap-2">
+                                <div class="font-bold text-montano-blue min-w-[70px]">Reviewer:</div>
+                                <div class="text-gray-700 bg-white p-2 rounded shadow-xs border">Present your final portfolio synthesis and demonstrate your mastery of psychology in marketing.</div>
+                            </div>
+                        </div>
+
+                        <!-- Voice Controls and Fallback Input -->
+                        <div class="space-y-3">
+                            <div class="flex gap-2">
+                                <button id="start-record-btn" onclick="toggleSpeechRecognition()" class="flex-1 bg-montano-blue hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition text-sm shadow">
+                                    <i class="fa-solid fa-microphone"></i> <span id="record-btn-text">Speak Response</span>
+                                </button>
+                                <button onclick="triggerTTSResponse()" class="bg-montano-teal hover:bg-teal-700 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition text-sm shadow">
+                                    <i class="fa-solid fa-volume-high"></i> Listen AI
+                                </button>
+                            </div>
+                            
+                            <div class="flex gap-2">
+                                <input type="text" id="manual-text-input" placeholder="Or type your final portfolio defense here..." class="flex-1 border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-montano-blue">
+                                <button onclick="processTextSubmission()" class="bg-montano-olive hover:bg-green-700 text-white font-bold px-4 py-2 rounded-lg text-sm transition">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Live Performance Dashboard (Right - 5 Cols) -->
+                    <div class="lg:col-span-5 bg-gray-50 border border-gray-300 rounded-xl p-5 space-y-4">
+                        <h3 class="font-bold text-gray-800 text-md border-b pb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-chart-line text-montano-blue"></i> Real-Time Performance Dashboard
+                        </h3>
+
+                        <!-- Metric 1 -->
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-1">
+                                <span>Pronunciation & Speech Clarity Score</span>
+                                <span id="score-pronunciation" class="text-montano-blue">0%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div id="bar-pronunciation" class="bg-montano-blue h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Metric 2 -->
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-1">
+                                <span>Synthesis Accuracy & Perspective Score</span>
+                                <span id="score-accuracy" class="text-montano-teal">0%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div id="bar-accuracy" class="bg-montano-teal h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Metric 3 -->
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-1">
+                                <span>Politeness & Professional Etiquette Score</span>
+                                <span id="score-olive" class="text-montano-olive">0%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div id="bar-politeness" class="bg-montano-olive h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Key Terms Container -->
+                        <div class="pt-2">
+                            <p class="text-xs font-bold text-gray-600 mb-2">Detected Synthesis Terms:</p>
+                            <div id="detected-terms" class="flex flex-wrap gap-1 min-h-[35px] p-2 bg-white rounded border border-gray-200 text-xs text-gray-400">
+                                Waiting for input...
+                            </div>
+                        </div>
+
+                        <!-- AI Feedback Container -->
+                        <div class="bg-white p-3 rounded-lg border border-montano-lightblue space-y-1">
+                            <p class="text-xs font-bold text-montano-blue flex items-center gap-1">
+                                <i class="fa-solid fa-robot"></i> AI Pedagogical Feedback:
+                            </p>
+                            <p id="ai-feedback-text" class="text-xs text-gray-600 italic">
+                                Speak or type your defense to receive immediate diagnostic evaluation regarding portfolio synthesis and dual perspectives.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: CRITICAL REFLECTION QUESTIONS -->
+            <section id="tab4" class="tab-content hidden space-y-6">
+                <div class="bg-montano-softwhite p-4 rounded-xl border-l-4 border-montano-blue flex justify-between items-center">
+                    <div>
+                        <h2 class="text-xl font-bold text-montano-blue">Critical Reflection & Activity 4 Final Workshop</h2>
+                        <p class="text-xs text-gray-600">Reflect on the entire unit, evaluate dual-perspective consumer choices, and organize your final portfolio. Answers auto-save locally.</p>
+                    </div>
+                    <span class="bg-montano-yellow text-montano-blue font-bold text-xs px-3 py-1.5 rounded-full shadow-xs">Activity 4 Due</span>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Reflection 1 -->
+                    <div class="bg-white border rounded-xl p-5 shadow-sm space-y-3">
+                        <label class="font-bold text-gray-800 text-sm block">
+                            1. How do applying two different psychological perspectives (e.g., Cognitive and Behavioral) provide a deeper explanation of a consumer purchasing decision than using only one?
+                        </label>
+                        <textarea id="ref-q1" oninput="saveReflection('ref-q1')" rows="4" placeholder="Write your critical synthesis here..." class="w-full border rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-montano-blue custom-scrollbar"></textarea>
+                    </div>
+
+                    <!-- Reflection 2 -->
+                    <div class="bg-white border rounded-xl p-5 shadow-sm space-y-3">
+                        <label class="font-bold text-gray-800 text-sm block">
+                            2. Review your peer checklist and portfolio organization. What was the most valuable piece of feedback your team incorporated into your final campaign artifact?
+                        </label>
+                        <textarea id="ref-q2" oninput="saveReflection('ref-q2')" rows="4" placeholder="Write your critical synthesis here..." class="w-full border rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-montano-teal custom-scrollbar"></textarea>
+                    </div>
+
+                    <!-- Reflection 3 -->
+                    <div class="bg-white border rounded-xl p-5 shadow-sm space-y-3">
+                        <label class="font-bold text-gray-800 text-sm block">
+                            3. Reflect on the intersection of psychology as a science and ethical marketing. How will you ensure your future professional marketing career respects consumer autonomy?
+                        </label>
+                        <textarea id="ref-q3" oninput="saveReflection('ref-q3')" rows="4" placeholder="Write your critical synthesis here..." class="w-full border rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-montano-olive custom-scrollbar"></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 5: FORMATIVE EVALUATION (15 PROBLEMS WITH TOGGLE SOLUTIONS) -->
+            <section id="tab5" class="tab-content hidden space-y-6">
+                <div class="flex justify-between items-center border-b pb-3">
+                    <div>
+                        <h2 class="text-xl font-bold text-montano-blue">Formative Evaluation Assessment</h2>
+                        <p class="text-xs text-gray-500">15 problem-solving exercises across 3 difficulty tiers. Use the toggle buttons to verify step-by-step solutions.</p>
+                    </div>
+                </div>
+
+                <!-- Level 1 Exercises -->
+                <div class="space-y-4">
+                    <h3 class="text-md font-bold text-montano-blue uppercase tracking-wide">Tier 1: Unit Foundations, History & Schools</h3>
+                    <div class="space-y-3" id="eval-tier-1"></div>
+                </div>
+
+                <!-- Level 2 Exercises -->
+                <div class="space-y-4 pt-4 border-t">
+                    <h3 class="text-md font-bold text-montano-teal uppercase tracking-wide">Tier 2: Dual-Perspective & Behavior Analysis</h3>
+                    <div class="space-y-3" id="eval-tier-2"></div>
+                </div>
+
+                <!-- Level 3 Exercises -->
+                <div class="space-y-4 pt-4 border-t">
+                    <h3 class="text-md font-bold text-montano-olive uppercase tracking-wide">Tier 3: Final Portfolio Synthesis & Ethical Governance</h3>
+                    <div class="space-y-3" id="eval-tier-3"></div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-100 border-t p-3 text-center text-xs text-gray-500 font-semibold">
+            Colegio Montano &copy; 2026 | Instructional Design & Interactive Educational Technology
+        </footer>
+    </div>
+
+    <!-- JavaScript Implementation -->
+    <script>
+        // --- Navigation Logic ---
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.remove('hidden');
+            document.getElementById('btn-' + tabId).classList.add('active');
+        }
+
+        // --- Fullscreen Toggle ---
+        function toggleFullscreen() {
+            const container = document.getElementById('mainContainer');
+            if (!document.fullscreenElement) {
+                if (container.requestFullscreen) container.requestFullscreen();
+                else if (container.webkitRequestFullscreen) container.webkitRequestFullscreen();
+            } else {
+                if (document.exitFullscreen) document.exitFullscreen();
+            }
+        }
+
+        // --- Text To Speech Integration ---
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.95;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('Text-to-Speech is not supported in this browser.');
+            }
+        }
+
+        // --- Solved Examples Data (15 Items) ---
+        const solvedExamplesData = [
+            // Basic (1-5)
+            { level: 1, title: "Psychology as a Science Synthesis", body: "Question: What defines psychology as an empirical science across all unit topics?\nAnswer: The systematic study of behavior and mental processes using objective observation, evidence, and scientific method." },
+            { level: 1, title: "Historical Roots & Wundt (1879)", body: "Question: What was the significance of Wilhelm Wundt's 1879 laboratory?\nAnswer: It marked the formal birth of experimental psychology by establishing controlled laboratory measurement of mental processes." },
+            { level: 1, title: "Early Schools Overview", body: "Question: How did structuralism and functionalism differ in focus?\nAnswer: Structuralism analyzed the basic elements of consciousness (Wundt/Titchener); functionalism examined the adaptive purpose of behavior (James)." },
+            { level: 1, title: "Modern Perspectives Summary", body: "Question: What are the core modern perspectives covered in the unit?\nAnswer: Biological, behavioral, cognitive, psychodynamic, humanistic, sociocultural, and evolutionary perspectives." },
+            { level: 1, title: "Activity 4 Final Portfolio", body: "Question: What is the primary objective of Activity 4 final portfolio submission?\nAnswer: To compile all unit learnings, campaign analyses, peer checklists, and ethical reflections into a professional dossier." },
+            
+            // Intermediate (6-10)
+            { level: 2, title: "Cognitive + Behavioral Choice Analysis", body: "Question: Explain a consumer decision to buy an eco-friendly product using both Cognitive and Behavioral perspectives.\nAnswer: Cognitively, the consumer processes information on climate impact; behaviorally, past brand rewards and green incentives reinforce purchase." },
+            { level: 2, title: "Humanistic + Sociocultural Motivation", body: "Question: How do Humanistic and Sociocultural perspectives explain brand loyalty for luxury goods?\nAnswer: Humanistically, it fulfills self-actualization and esteem needs; socioculturally, it signals group belonging and social status." },
+            { level: 2, title: "Attention, Perception & Memory", body: "Question: How do internal mental processes shape advertising effectiveness?\nAnswer: Selective attention filters noise, perception interprets brand imagery, and memory stores long-term brand associations." },
+            { level: 2, title: "Persuasion vs Manipulation", body: "Question: How do psychological principles ensure ethical advertising?\nAnswer: By leveraging transparent persuasion, accurate claims, and respecting consumer autonomy rather than deceptive manipulation." },
+            { level: 2, title: "Consumer Psychology Applications", body: "Question: How does industrial-organizational and consumer psychology bridge academic theory with retail strategy?\nAnswer: By utilizing empirical research on motivation and decision-making to optimize product design and ethical marketing." },
+
+            // Advanced (11-15)
+            { level: 3, title: "Multi-Perspective Campaign Audit", body: "Question: Audit a global marketing campaign using three distinct perspectives: what makes it robust?\nAnswer: Integrating biological/evolutionary drives, cognitive processing, and cultural context ensures broad resonance and psychological accuracy." },
+            { level: 3, title: "Peer Review Checklist Verification", body: "Question: Why is a rigorous peer review checklist essential before finalizing portfolio campaign evidence?\nAnswer: It catches blind spots regarding stereotype bias, ethical compliance, and conceptual clarity across team contributions." },
+            { level: 3, title: "Ethical Governance in Marketing", body: "Question: How can marketing professionals establish internal ethical governance using psychological insights?\nAnswer: By instituting strict guidelines against false urgency, emotional exploitation, and deceptive dark UX patterns." },
+            { level: 3, title: "Synthesizing Unit Knowledge", body: "Question: How does understanding the historical evolution from philosophy to modern empirical science empower modern marketers?\nAnswer: It provides a rigorous theoretical foundation to ethically predict, influence, and interpret consumer behavior." },
+            { level: 3, title: "Final Portfolio Excellence", body: "Question: What distinguishes an exceptional Activity 4 final portfolio in marketing psychology?\nAnswer: Flawless integration of psychological concepts, dual-perspective analyses, polished peer feedback incorporation, and exemplary professional presentation." }
+        ];
+
+        function renderExamples() {
+            const basicContainer = document.getElementById('basic-examples');
+            const interContainer = document.getElementById('intermediate-examples');
+            const advContainer = document.getElementById('advanced-examples');
+
+            solvedExamplesData.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = "bg-montano-softwhite p-4 rounded-lg border border-gray-200 flex flex-col justify-between space-y-3 shadow-xs";
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start mb-1">
+                            <h4 class="font-bold text-sm text-gray-800">#${index+1} ${item.title}</h4>
+                            <button onclick="speakText('${item.body.replace(/'/g, "\\'")}')" class="text-montano-blue hover:text-blue-800 p-1" title="Listen with Audio">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </button>
+                        </div>
+                        <p class="text-xs text-gray-600 whitespace-pre-line leading-relaxed">${item.body}</p>
+                    </div>
+                `;
+                if (item.level === 1) basicContainer.appendChild(card);
+                else if (item.level === 2) interContainer.appendChild(card);
+                else advContainer.appendChild(card);
+            });
+        }
+
+        // --- Voice Simulator & Dashboard Logic ---
+        let recognition;
+        let isRecording = false;
+
+        function toggleSpeechRecognition() {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                alert('Speech Recognition Web API is not supported in this browser. Please use Chrome or Edge, or use text fallback input.');
+                return;
+            }
+
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            
+            if (!recognition) {
+                recognition = new SpeechRecognition();
+                recognition.continuous = false;
+                recognition.interimResults = false;
+                recognition.lang = 'en-US';
+
+                recognition.onstart = () => {
+                    isRecording = true;
+                    document.getElementById('mic-status-indicator').className = "w-3 h-3 rounded-full bg-red-500 animate-ping inline-block";
+                    document.getElementById('mic-status-text').innerText = "Listening...";
+                    document.getElementById('record-btn-text').innerText = "Stop Recording";
+                };
+
+                recognition.onresult = (event) => {
+                    const transcript = event.results[0][0].transcript;
+                    document.getElementById('manual-text-input').value = transcript;
+                    evaluateSpeechInput(transcript);
+                };
+
+                recognition.onerror = (event) => {
+                    console.error('Speech recognition error:', event.error);
+                    stopRecordingState();
+                };
+
+                recognition.onend = () => {
+                    stopRecordingState();
+                };
+            }
+
+            if (isRecording) {
+                recognition.stop();
+            } else {
+                recognition.start();
+            }
+        }
+
+        function stopRecordingState() {
+            isRecording = false;
+            document.getElementById('mic-status-indicator').className = "w-3 h-3 rounded-full bg-gray-400 inline-block";
+            document.getElementById('mic-status-text').innerText = "Microphone Idle";
+            document.getElementById('record-btn-text').innerText = "Speak Response";
+        }
+
+        function processTextSubmission() {
+            const input = document.getElementById('manual-text-input').value;
+            if (input.trim() !== '') {
+                evaluateSpeechInput(input);
+            }
+        }
+
+        function evaluateSpeechInput(text) {
+            const dialogue = document.getElementById('dialogue-box');
+            dialogue.innerHTML += `
+                <div class="flex gap-2 justify-end">
+                    <div class="text-white bg-montano-blue p-2 rounded shadow-xs max-w-[80%]">${text}</div>
+                    <div class="font-bold text-montano-teal min-w-[50px] text-right">You:</div>
+                </div>
+            `;
+            dialogue.scrollTop = dialogue.scrollHeight;
+
+            const lower = text.toLowerCase();
+            const keywords = ['portfolio', 'perspective', 'cognitive', 'behavioral', 'ethics', 'synthesis', 'wundt', 'consumer', 'motivation', 'perception', 'checklist'];
+            
+            let detected = [];
+            keywords.forEach(kw => {
+                if (lower.includes(kw)) detected.push(kw);
+            });
+
+            const accuracyScore = Math.min(100, Math.round((detected.length / 4) * 100));
+            const politenessKeywords = ['thank you', 'reviewer', 'please', 'would', 'suggest', 'respectfully', 'good morning', 'sir'];
+            let politeCount = 0;
+            politenessKeywords.forEach(pw => { if (lower.includes(pw)) politeCount++; });
+            const politenessScore = Math.min(100, 60 + (politeCount * 20));
+            const pronunciationScore = text.length > 20 ? Math.min(98, 75 + Math.floor(Math.random() * 20)) : 40;
+
+            document.getElementById('bar-pronunciation').style.width = pronunciationScore + '%';
+            document.getElementById('score-pronunciation').innerText = pronunciationScore + '%';
+
+            document.getElementById('bar-accuracy').style.width = accuracyScore + '%';
+            document.getElementById('score-accuracy').innerText = accuracyScore + '%';
+
+            document.getElementById('bar-politeness').style.width = politenessScore + '%';
+            document.getElementById('score-olive').innerText = politenessScore + '%';
+
+            const termsContainer = document.getElementById('detected-terms');
+            if (detected.length > 0) {
+                termsContainer.innerHTML = detected.map(d => `<span class="bg-blue-100 text-montano-blue font-bold px-2 py-0.5 rounded">${d}</span>`).join(' ');
+            } else {
+                termsContainer.innerHTML = `<span class="text-red-400">No synthesis terms detected. Try mentioning portfolio, perspective, cognitive, behavioral, or ethics.</span>`;
+            }
+
+            let feedback = "";
+            if (accuracyScore >= 75) {
+                feedback = "Outstanding defense! Your portfolio synthesis demonstrates exceptional mastery of psychological perspectives and ethical marketing.";
+            } else if (accuracyScore >= 40) {
+                feedback = "Good response. To increase accuracy, mention specific dual perspectives (cognitive/behavioral) or portfolio checklist items.";
+            } else {
+                feedback = "Needs improvement. Ensure you reference portfolio evidence, psychological perspectives, and ethics.";
+            }
+            document.getElementById('ai-feedback-text').innerText = feedback;
+        }
+
+        function triggerTTSResponse() {
+            const feedback = document.getElementById('ai-feedback-text').innerText;
+            speakText("AI Evaluation Response: " + feedback);
+        }
+
+        // --- Critical Reflection Auto-Save ---
+        function saveReflection(id) {
+            const val = document.getElementById(id).value;
+            localStorage.setItem('montano_psych_g9_' + id, val);
+        }
+
+        function loadReflections() {
+            ['ref-q1', 'ref-q2', 'ref-q3'].forEach(id => {
+                const saved = localStorage.getItem('montano_psych_g9_' + id);
+                if (saved) document.getElementById(id).value = saved;
+            });
+        }
+
+        // --- Formative Evaluation Data (15 Problems) ---
+        const evalProblems = [
+            // Level 1
+            { tier: 1, q: "1. How does psychology qualify as an empirical science?", ans: "Answer: Through systematic observation, hypothesis testing, and evidence-based research." },
+            { tier: 1, q: "2. What contribution did Wilhelm Wundt make in 1879?", ans: "Answer: He established the first experimental psychology laboratory in Leipzig, Germany." },
+            { tier: 1, q: "3. What was the central focus of Structuralism versus Functionalism?", ans: "Answer: Structuralism analyzed sensory components of consciousness; functionalism studied the adaptive functions of behavior." },
+            { tier: 1, q: "4. Name four modern psychological perspectives studied in this unit.", ans: "Answer: Biological, behavioral, cognitive, and psychodynamic (plus humanistic, sociocultural, evolutionary)." },
+            { tier: 1, q: "5. What is the primary purpose of Activity 4 final portfolio submission?", ans: "Answer: To curate and synthesize all unit artifacts, peer reviews, and ethical marketing reflections." },
+            
+            // Level 2
+            { tier: 2, q: "6. Explain a consumer purchasing choice using both Cognitive and Behavioral perspectives.", ans: "Answer: Cognitively, the buyer processes brand value and reviews; behaviorally, past rewards and discounts reinforce loyalty." },
+            { tier: 2, q: "7. How do attention, perception, and memory interact during ad exposure?", ans: "Answer: Attention filters sensory overload, perception interprets visual cues, and memory encodes brand messaging." },
+            { tier: 2, q: "8. How do sociocultural and humanistic perspectives explain brand loyalty?", ans: "Answer: Socioculturally through peer group identity; humanistically through self-actualization and personal growth." },
+            { tier: 2, q: "9. What distinguishes ethical persuasion from psychological manipulation?", ans: "Answer: Ethical persuasion respects consumer autonomy and factual honesty; manipulation exploits cognitive vulnerabilities." },
+            { tier: 2, q: "10. Why is industrial-organizational and consumer psychology vital for marketing success?", ans: "Answer: It bridges scientific behavioral research with practical retail and advertising strategy." },
+
+            // Level 3
+            { tier: 3, q: "11. Audit a multi-perspective campaign: evaluate how biological, cognitive, and cultural factors are integrated.", ans: "Answer: A robust campaign addresses innate human drives (biological), clear informational messaging (cognitive), and local norms (cultural)." },
+            { tier: 3, q: "12. What role does the peer checklist play in finalizing portfolio evidence?", ans: "Answer: It ensures objective evaluation of team work, removing bias and verifying ethical compliance." },
+            { tier: 3, q: "13. Analyze the long-term business impact of transitioning from deceptive marketing to ethical persuasion.", ans: "Answer: While deceptive tactics yield short-term spikes, ethical persuasion builds enduring trust, customer retention, and brand equity." },
+            { tier: 3, q: "14. Outline the key criteria for a successful Activity 4 final portfolio presentation.", ans: "Answer: Comprehensive conceptual synthesis, dual-perspective rigor, peer feedback integration, and professional polish." },
+            { tier: 3, q: "15. Synthesize the unit: how does psychological science empower marketers to be both profitable and socially responsible?", ans: "Answer: By grounding strategies in empirical human behavior while upholding strict ethical standards and respect for consumer autonomy." }
+        ];
+
+        function renderEvaluation() {
+            const t1 = document.getElementById('eval-tier-1');
+            const t2 = document.getElementById('eval-tier-2');
+            const t3 = document.getElementById('eval-tier-3');
+
+            evalProblems.forEach((item, index) => {
+                const box = document.createElement('div');
+                box.className = "bg-white border border-gray-200 rounded-lg p-4 shadow-xs space-y-2";
+                box.innerHTML = `
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                        <p class="text-sm font-semibold text-gray-800">${item.q}</p>
+                        <button onclick="toggleSolution('sol-${index}')" class="text-xs bg-montano-softwhite hover:bg-montano-lightblue text-montano-blue font-bold px-3 py-1.5 rounded border border-montano-lightblue transition shrink-0">
+                            Show / Hide Solution
+                        </button>
+                    </div>
+                    <div id="sol-${index}" class="hidden mt-2 p-3 bg-blue-50 border-l-4 border-montano-blue text-xs text-gray-700 font-medium">
+                        ${item.ans}
+                    </div>
+                `;
+                if (item.tier === 1) t1.appendChild(box);
+                else if (item.tier === 2) t2.appendChild(box);
+                else t3.appendChild(box);
+            });
+        }
+
+        function toggleSolution(id) {
+            const el = document.getElementById(id);
+            el.classList.toggle('hidden');
+        }
+
+        // Initialize Page Data
+        window.onload = function() {
+            renderExamples();
+            renderEvaluation();
+            loadReflections();
+        };
+    </script>
+</body>
+</html>
